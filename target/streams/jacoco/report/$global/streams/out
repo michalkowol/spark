@@ -1,0 +1,12 @@
+[0m[[0mdebug[0m] [0mUsing file jacoco.exec to create report[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m------- Jacoco Coverage Report --------[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mLines: 0% (>= required 0.0%) covered, 0 of 0 missed, OK[0m
+[0m[[0minfo[0m] [0mInstructions: 0% (>= required 0.0%) covered, 0 of 0 missed, OK[0m
+[0m[[0minfo[0m] [0mBranches: 0% (>= required 0.0%) covered, 0 of 0 missed, OK[0m
+[0m[[0minfo[0m] [0mMethods: 0% (>= required 0.0%) covered, 0 of 0 missed, OK[0m
+[0m[[0minfo[0m] [0mComplexity: 0% (>= required 0.0%) covered, 0 of 0 missed, OK[0m
+[0m[[0minfo[0m] [0mClass: 0% (>= required 0.0%) covered, 0 of 0 missed, OK[0m
+[0m[[0minfo[0m] [0mCheck C:\Users\michal\Dropbox\Projekty\scala\templates\sbt\target\scala-2.11\jacoco for detail report[0m
+[0m[[0minfo[0m] [0m[0m

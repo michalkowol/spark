@@ -23,7 +23,6 @@ object SimpleApp {
 
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
-    sc.addJar("/home/senu/dev/spark/proj2/spark/lib/jaws-bin.jar")
     val wordDataFile = sc.textFile(file, 2).cache()
 
     val words = wordDataFile.flatMap(line => line.split("\\W+"))

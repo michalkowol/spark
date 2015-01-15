@@ -17,7 +17,9 @@ object SimpleApp {
   }
   def main(args: Array[String]) {
     val file = args(0)
-    val sentence = args(1)
+    val wordnetDataFile = args(1)
+    val sentence = args(2)
+    // /home/senu/dev/spark/WordNet-3.0/dict
 
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
@@ -32,16 +34,19 @@ object SimpleApp {
 
     println(s"Total word count $totalWordCount")
 
-    val threshold = 0.001
+    val synonyms = new WordnetSynonyms(wordnetDataFile)
 
    // showMostPopularWords(wordDataFile)
+
+    val threshold = 0.001
 
     sentence.split("\\W+").map(_.toLowerCase).map {
       word =>
         val wordCount = wordCountMap.getOrElse(word, 0)
         val frequency = wordCount.toFloat / totalWordCount
         if (frequency < threshold) {
-          "%s[%8.7f] ".format(word, frequency)
+          val synStr = synonyms.synonyms(word)
+          "%s[%8.7f %s] ".format(word, frequency, synStr.mkString("|"))
         } else {
           "%s ".format(word)
         }

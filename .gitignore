@@ -15,4 +15,6 @@ project/plugins/project/
 
 # data
 data/corpus/*.txt
+
+.DS_Store
   

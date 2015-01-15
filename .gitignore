@@ -12,3 +12,6 @@ project/plugins/project/
 # IDEA
 .idea/
 *.iml
+
+# data
+data/corpus/*.txt

@@ -1,6 +1,6 @@
-name := "project"
+name := "Spark Hackaton App"
 version in ThisBuild := "1.0"
-scalaVersion in ThisBuild := "2.10.5"
+scalaVersion in ThisBuild := "2.10.4"
 
 incOptions := incOptions.value.withNameHashing(true)
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")

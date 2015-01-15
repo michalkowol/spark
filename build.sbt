@@ -11,8 +11,4 @@ defaultScalariformSettings
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.3" % "test"
-libraryDependencies += "org.mockito" % "mockito-all" % "1.10.19" % "test"
-
-libraryDependencies += "org.apache.spark" %% "spark-core" % "1.2.0"
-
+//libraryDependencies += "org.apache.spark" %% "spark-core" % "1.2.0"

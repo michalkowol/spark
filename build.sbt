@@ -18,3 +18,6 @@ libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.3" % "test"
 libraryDependencies += "org.mockito" % "mockito-all" % "1.10.19" % "test"
+
+libraryDependencies += "org.apache.spark" %% "spark-core" % "1.2.0"
+

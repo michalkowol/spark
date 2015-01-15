@@ -3,18 +3,32 @@ package pl.spark.synonyms
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
-
+import org.apache.spark.rdd.RDD
 object SimpleApp {
+  def showTopGlobalFrequencies(wordDataFile: RDD[String]) = {
+    val frequency = wordDataFile.flatMap(line => line.split("\\W+"))
+      .map(word => (word.toLowerCase, 1))
+      .reduceByKey((a, b) => a + b).map { case (word, count) => (count, word) }
+      .sortByKey(false)
+      .collect()
+    frequency.take(10).foreach(println)
+  }
   def main(args: Array[String]) {
     val file = args(0)
+    val sentence = args(1)
+
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
     val wordDataFile = sc.textFile(file, 2).cache()
-    val frequency = wordDataFile.flatMap(line => line.split("\\W+"))
-    							.map(word => (word.toLowerCase, 1))
-    							.reduceByKey((a, b) => a + b).map { case (word, count) => (count, word) } 
-    							.sortByKey(false)
-    							.collect()
-    frequency.take(10).foreach(println)
+    val wordCountMap = wordDataFile.flatMap(line => line.split("\\W+"))
+      .map(word => (word.toLowerCase, 1))
+      .reduceByKey((a, b) => a + b)
+      .collectAsMap()
+
+
+    sentence.split("\\W+").map(_.toLowerCase).map {
+      word =>  "%s[%s] ".format(word, wordCountMap.getOrElse(word, 0))
+    } foreach { x=> print(x)  }
+
   }
 }

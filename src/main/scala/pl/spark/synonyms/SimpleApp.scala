@@ -20,11 +20,15 @@ object SimpleApp {
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
     val wordDataFile = sc.textFile(file, 2).cache()
-    val wordCountMap = wordDataFile.flatMap(line => line.split("\\W+"))
+
+    val words = wordDataFile.flatMap(line => line.split("\\W+"))
+    val totalWordCount = words.count()
+    val wordCountMap = words
       .map(word => (word.toLowerCase, 1))
       .reduceByKey((a, b) => a + b)
       .collectAsMap()
 
+    println(s"Total word count $totalWordCount")
 
     sentence.split("\\W+").map(_.toLowerCase).map {
       word =>  "%s[%s] ".format(word, wordCountMap.getOrElse(word, 0))

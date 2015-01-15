@@ -32,10 +32,19 @@ object SimpleApp {
 
     println(s"Total word count $totalWordCount")
 
+    val threshold = 0.001
+
    // showMostPopularWords(wordDataFile)
 
     sentence.split("\\W+").map(_.toLowerCase).map {
-      word =>  "%s[%s] ".format(word, wordCountMap.getOrElse(word, 0))
+      word =>
+        val wordCount = wordCountMap.getOrElse(word, 0)
+        val frequency = wordCount.toFloat / totalWordCount
+        if (frequency < threshold) {
+          "%s[%8.7f] ".format(word, frequency)
+        } else {
+          "%s ".format(word)
+        }
     } foreach { x=> print(x)  }
 
   }

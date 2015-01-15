@@ -5,13 +5,15 @@ import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
 object SimpleApp {
-  def showTopGlobalFrequencies(wordDataFile: RDD[String]) = {
+  def showMostPopularWords(wordDataFile: RDD[String]) = {
     val frequency = wordDataFile.flatMap(line => line.split("\\W+"))
       .map(word => (word.toLowerCase, 1))
       .reduceByKey((a, b) => a + b).map { case (word, count) => (count, word) }
       .sortByKey(false)
       .collect()
-    frequency.take(10).foreach(println)
+
+    println("Most popular words")
+    frequency.take(50).foreach(println)
   }
   def main(args: Array[String]) {
     val file = args(0)
@@ -29,6 +31,8 @@ object SimpleApp {
       .collectAsMap()
 
     println(s"Total word count $totalWordCount")
+
+   // showMostPopularWords(wordDataFile)
 
     sentence.split("\\W+").map(_.toLowerCase).map {
       word =>  "%s[%s] ".format(word, wordCountMap.getOrElse(word, 0))

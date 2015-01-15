@@ -31,7 +31,7 @@ class WordnetSynonyms(path: String) extends Synonyms {
   }
 }
 
-object WordnetApp extends App {
-  val synonyms = new WordnetSynonyms("/Users/kowolm/tmp/spark/wordnet/dict").synonyms("go")
-  println(synonyms)
-}
+//object WordnetApp extends App {
+//  val synonyms = new WordnetSynonyms("/Users/kowolm/tmp/spark/wordnet/dict").synonyms("go")
+//  println(synonyms)
+//}

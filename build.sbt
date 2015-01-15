@@ -12,3 +12,5 @@ libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2"
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % "1.2.0"
+
+

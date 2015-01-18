@@ -17,9 +17,7 @@ object SimpleApp {
   }
   def main(args: Array[String]) {
     val file = args(0)
-    val wordnetDataFile = args(1)
-    val sentence = args(2)
-    // /home/senu/dev/spark/WordNet-3.0/dict
+    val sentence = args(1)
 
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
@@ -34,7 +32,7 @@ object SimpleApp {
 
     println(s"Total word count $totalWordCount")
 
-    val synonyms = new WordnetSynonyms(wordnetDataFile)
+    val synonyms = new WordnetSynonyms
 
    // showMostPopularWords(wordDataFile)
 

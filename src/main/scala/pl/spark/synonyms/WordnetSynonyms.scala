@@ -1,32 +1,21 @@
 package pl.spark.synonyms
 
-import edu.smu.tspell.wordnet._
-import scala.collection.JavaConversions._
-import scala.util.control.NonFatal
+import net.sf.extjwnl.data.IndexWord
 
-class WordnetSynonyms(path: String) extends Synonyms {
+import scala.collection.JavaConversions.asScalaBuffer
+import net.sf.extjwnl.dictionary.Dictionary
 
-  val database = WordNetDatabase.getFileInstance()
+class WordnetSynonyms extends Synonyms {
 
-  def synonyms(word: String): Seq[String] = {
-    try {
-      val wordNetDatabase = createWordNetDatabase
-      val synsets = wordNetDatabase.getSynsets(word)
-      val mostPopularSynset = mostPopularOne(synsets, word)
-      val synonyms = mostPopularSynset.getWordForms
-      synonyms
-    } catch {
-      case NonFatal(e) => Seq(word)
-    }
+  private val dictornary = Dictionary.getDefaultResourceInstance
+
+  override def synonyms(word: String): Seq[String] = {
+    for {
+      wordFromDictinary <- dictionaryLookup(word)
+      synset <- wordFromDictinary.getSenses
+      word <- synset.getWords
+    } yield word.getLemma
   }
 
-  private def mostPopularOne(synsets: Seq[Synset], word: String): Synset = {
-    synsets.maxBy(s => s.getTagCount(word))
-  }
-
-  private def createWordNetDatabase: WordNetDatabase = {
-    System.setProperty("wordnet.database.dir", path)
-    val database = WordNetDatabase.getFileInstance()
-    database
-  }
+  private def dictionaryLookup(word: String): Seq[IndexWord] = dictornary.lookupAllIndexWords(word).getIndexWordArray
 }
